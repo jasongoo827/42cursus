@@ -93,11 +93,9 @@ int	ft_allocate(char **strs, char const *s, char c, int len)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
 	int		len;
 	char	**ret;
 
-	i = 0;
 	len = ft_word_count(s, c);
 	ret = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!ret)

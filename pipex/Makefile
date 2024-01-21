@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRCS_PS = test.c ft_split.c ft_strjoin.c ft_strlen.c
+SRCS_PS = main.c ft_split.c ft_strjoin.c ft_strlen.c
 
 SUB_LIB = libft.a
 SUB_LIBDIR = ./Libft/libft
