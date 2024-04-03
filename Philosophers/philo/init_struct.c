@@ -6,15 +6,16 @@ static int	init_data(t_data *data, int argc, char *argv[])
 	data->death_time = ph_atoi(argv[2]);
 	data->eat_time = ph_atoi(argv[3]);
 	data->sleep_time = ph_atoi(argv[4]);
-	if (argc == 6)
+	if (argc == 6 && ph_atoi(argv[5]) > 0)
 		data->must_eat_num = ph_atoi(argv[5]);
 	else
 		data->must_eat_num = -1;
-	if (data->philo_num <= 0 || data->death_time < 0 || data->eat_time < 0\
-	|| data->sleep_time < 0)
-		return (-1);
+	if (data->philo_num <= 0 || data->philo_num > MAXINT || data->death_time < 0 \
+	|| data->death_time > MAXINT || data->eat_time < 0 || data->eat_time > MAXINT\
+	|| data->sleep_time < 0 || data->sleep_time > MAXINT)
+		return (error(NULL, INVALID));
+	pthread_mutex_init(&data->start, NULL);
 	pthread_mutex_init(&data->write, NULL);
-	pthread_mutex_init(&data->read, NULL);
 	pthread_mutex_init(&data->lock, NULL);
 	data->dead = 0;
 	data->fininshed = 0;
@@ -25,13 +26,13 @@ static int	alloc_data(t_data *data)
 {
 	data->tid = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	if (data->tid == NULL)
-		return (-1);
+		return (error(data, MALLOC_ERR));
 	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->philo_num);
 	if (data->forks == NULL)
-		return (-1);
+		return (error(data, MALLOC_ERR));
 	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	if (data->philos == NULL)
-		return (-1);
+		return (error(data, MALLOC_ERR));
 	return (0);
 }
 
