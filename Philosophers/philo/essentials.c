@@ -1,10 +1,24 @@
 #include "philo.h"
 
+int	check_death(t_data *data)
+{
+	pthread_mutex_lock(&data->lock);
+	if (data->dead == 1)
+	{
+		pthread_mutex_unlock(&data->lock);
+		return (-1);
+	}
+	else
+	{
+		pthread_mutex_unlock(&data->lock);
+		return (0);
+	}
+}
+
 void	message(t_philo *philo, char *str)
 {
 	LL	time;
 
-	// ph_usleep(1);
 	pthread_mutex_lock(&philo->data->write);
 	time = get_time() - philo->data->start_time;
 	if (ph_strncmp(str, "died", 5) == 0 && philo->data->dead == 0)
@@ -19,18 +33,38 @@ void	message(t_philo *philo, char *str)
 
 void	take_fork(t_philo *philo)
 {
-	pthread_mutex_lock(philo->r_fork);
-	message(philo, "has taken a fork");
-	pthread_mutex_lock(philo->l_fork);
-	message(philo, "has taken a fork");
+	if (philo->idx & 1)
+	{
+		pthread_mutex_lock(philo->r_fork);
+		message(philo, "has taken a fork");
+		pthread_mutex_lock(philo->l_fork);
+		message(philo, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->l_fork);
+		message(philo, "has taken a fork");
+		pthread_mutex_lock(philo->r_fork);
+		message(philo, "has taken a fork");
+	}
 }
 
 void	drop_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
-	message(philo, "is sleeping");
-	ph_usleep(philo->data->sleep_time);
+	if (philo->idx & 1)
+	{
+		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_unlock(philo->r_fork);
+		message(philo, "is sleeping");
+		ph_usleep(philo->data->sleep_time);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
+		message(philo, "is sleeping");
+		ph_usleep(philo->data->sleep_time);
+	}
 }
 
 void	eat(t_philo *philo)
