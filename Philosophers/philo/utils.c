@@ -6,7 +6,7 @@ void	ph_usleep(useconds_t time)
 
 	start_time = get_time();
 	while (get_time() - start_time < time)
-		usleep(time / 10);
+		usleep(200);
 }
 
 LL	get_time()
@@ -56,4 +56,13 @@ int	ph_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
+}
+
+int	error(t_data *data, char *str)
+{
+	write(2, str, ph_strlen(str));
+	if (data)
+		free_memory(data);
+
+	return (-1);
 }
