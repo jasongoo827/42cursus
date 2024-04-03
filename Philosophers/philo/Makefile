@@ -4,11 +4,11 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g#3 -fsanitize=thread
 
 RM = rm -f
 
-SRCS = main.c init_struct.c utils.c essentials.c routine.c
+SRCS = main.c init_struct.c utils.c utils2.c essentials.c routine.c
 OBJS = $(SRCS:%.c=%.o)
 # BNS_SRCS = 
 # BNS_OBJS = $(BNS_SRCS:%.c=%.o)
