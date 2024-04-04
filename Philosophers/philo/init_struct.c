@@ -70,10 +70,10 @@ static void	init_philos(t_data *data)
 
 int	init_struct(t_data *data, int argc, char *argv[])
 {
-	if (init_data(data, argc, argv) < 0)
-		return (-1);
-	if (alloc_data(data) < 0)
-		return (-1);
+	if (init_data(data, argc, argv))
+		return (1);
+	if (alloc_data(data))
+		return (1);
 	init_fork(data);
 	init_philos(data);
 	return (0);

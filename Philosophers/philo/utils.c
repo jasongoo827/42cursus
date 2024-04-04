@@ -60,9 +60,8 @@ int	ph_strncmp(const char *s1, const char *s2, size_t n)
 
 int	error(t_data *data, char *str)
 {
-	write(2, str, ph_strlen(str));
+	printf("%s\n", str);
 	if (data)
 		free_memory(data);
-
-	return (-1);
+	return (1);
 }

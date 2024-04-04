@@ -77,15 +77,16 @@ int	init_thread(t_data *data)
 	if (data->must_eat_num > 0)
 	{
 		if (pthread_create(&data->monitor_t, NULL, monitor, data) < 0)
-			return (-1);
+			return (error(data, TH_ERR));
 	}
 	while (++i < data->philo_num)
 	{
 		if (pthread_create(&data->tid[i], NULL, routine, &data->philos[i]) < 0)
-			return (-1);
+			return (error(data, TH_ERR));
 		ph_usleep(1);
 	}
-	pthread_create(&data->master_t, NULL, master, data);
+	if (pthread_create(&data->master_t, NULL, master, data) < 0)
+		return (error(data, TH_ERR));
 	pthread_mutex_unlock(&data->start);
 	i = -1;
 	while (++i < data->philo_num)

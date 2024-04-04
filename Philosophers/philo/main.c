@@ -43,7 +43,7 @@ int	case_one(t_data *data)
 {
 	data->start_time = get_time();
 	if (pthread_create(&data->tid[0], NULL, one_routine, &data->philos[0]) < 0)
-		return (1);
+		return (error(data, TH_ERR));
 	pthread_join(data->tid[0], NULL);
 	return (1);
 }
@@ -54,11 +54,11 @@ int	main(int argc, char *argv[])
 
 	if (argc < 5 || argc > 7)
 		return (1);
-	if (init_struct(&data, argc, argv) < 0)
+	if (init_struct(&data, argc, argv))
 		return (1);
 	if (data.philo_num == 1)
 		return (case_one(&data));
-	if (init_thread(&data) < 0)
+	if (init_thread(&data))
 		return (1);
 	ph_exit(&data);
 }

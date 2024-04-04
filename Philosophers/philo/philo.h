@@ -10,6 +10,7 @@
 # define MAXINT 2147483647
 # define INVALID "Invalid input\n"
 # define MALLOC_ERR "Memory Allocation failed\n"
+# define TH_ERR "Creating Thread failed\n"
 
 typedef long long LL;
 typedef struct s_data t_data;
