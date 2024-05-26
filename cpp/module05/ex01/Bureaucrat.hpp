@@ -21,25 +21,20 @@ public:
     void        decreaseGrade();
     void        signForm(Form& f);
 
-private:
-    const std::string name;
-    int grade;
-
+public:
     class GradeTooHighException: public std::exception
     {
-        virtual const char* what() const throw()
-        {
-            return "Bureaucrat Grade is too high!";
-        }
+        virtual const char* what() const throw();
     };
 
     class GradeTooLowException: public std::exception
     {
-        virtual const char* what() const throw()
-        {
-            return "Bureaucrat Grade is too low!";
-        }
+        virtual const char* what() const throw();
     };
+
+private:
+    const std::string name;
+    int grade;
 
 };
 

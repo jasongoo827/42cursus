@@ -5,6 +5,8 @@ int main(void)
 {
     try
     {
+        std::cout <<"TEST1: Normal Case\n";
+
         Bureaucrat a("jgoo", 100);
         std::cout << a << std::endl;
 
@@ -19,6 +21,8 @@ int main(void)
     }
     try
     {
+        std::cout <<"\nTEST2: Form too high Case\n";
+
         Bureaucrat a("jgoo", 100);
         std::cout << a << std::endl;
 
@@ -31,8 +35,10 @@ int main(void)
     {
         std::cerr << e.what() << '\n';
     }
-        try
+    try
     {
+        std::cout <<"\nTEST3: Form too low Case\n";
+
         Bureaucrat a("jgoo", 100);
         std::cout << a << std::endl;
 
@@ -47,6 +53,8 @@ int main(void)
     }
     try
     {
+        std::cout <<"\nTEST4: Form too low for sign Case\n";
+
         Bureaucrat a("jgoo", 100);
         std::cout << a << std::endl;
 

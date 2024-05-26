@@ -20,27 +20,23 @@ public:
     bool        getIsSigned() const;
     void        beSigned(const Bureaucrat& b);
 
+public:
+    class GradeTooHighException: public std::exception
+    {
+        virtual const char* what() const throw();
+    };
+
+    class GradeTooLowException: public std::exception
+    {
+        virtual const char* what() const throw();
+    };
+
 private:
     const std::string name;
     const int signGrade;
     const int executeGrade;
     bool isSigned;
-
-     class GradeTooHighException: public std::exception
-    {
-        virtual const char* what() const throw()
-        {
-            return "Form Grade is too high!";
-        }
-    };
-
-    class GradeTooLowException: public std::exception
-    {
-        virtual const char* what() const throw()
-        {
-            return "Form Grade is too low!";
-        }
-    };
+    
 };
 
 std::ostream& operator<<(std::ostream& out, const Form& rhs);

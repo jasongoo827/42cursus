@@ -18,25 +18,21 @@ public:
     void        increaseGrade();
     void        decreaseGrade();
 
-private:
-    const std::string name;
-    int grade;
-
+public:
     class GradeTooHighException: public std::exception
     {
-        virtual const char* what() const throw()
-        {
-            return "Grade is too high!";
-        }
+        virtual const char* what() const throw();
     };
 
     class GradeTooLowException: public std::exception
     {
-        virtual const char* what() const throw()
-        {
-            return "Grade is too low!";
-        }
+        virtual const char* what() const throw();
     };
+
+private:
+    const std::string name;
+    int grade;
+
 
 };
 

@@ -36,6 +36,7 @@ Form& Form::operator=(const Form& rhs)
 {
     if (this == &rhs)
         return (*this);
+    isSigned = rhs.getIsSigned();
     return (*this);
 }
 
@@ -69,11 +70,25 @@ void Form::beSigned(const Bureaucrat& b)
     if (b.getGrade() <= signGrade)
         isSigned = true;
     else
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
+}
+
+const char* Form::GradeTooHighException::what() const throw()
+{
+    return "Form grade is too high!";
+}
+
+const char* Form::GradeTooLowException::what() const throw()
+{
+    return "Form grade is too high!";
 }
 
 std::ostream& operator<<(std::ostream& out, const Form& rhs)
 {
-    out << rhs.getName() << ", form sign grade " << rhs.getSignGrade() << ", form execute grade " << rhs.getExecuteGrade() << ", is signed " << rhs.getIsSigned();
+    out << rhs.getName() << ", form sign grade " << rhs.getSignGrade() << ", form execute grade " << rhs.getExecuteGrade();
+    if (rhs.getIsSigned())
+        out << ", is signed ";
+    else
+        out << ", is not signed ";
     return (out);
 }

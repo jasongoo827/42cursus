@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := all
 
-NAME = ex02
+NAME = ex03
 
 CC = c++
 
@@ -8,7 +8,7 @@ CFLAGS = -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 RM = rm -f
 
-SRCS = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp Intern.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
